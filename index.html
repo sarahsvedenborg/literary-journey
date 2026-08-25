@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Literary Journey — 2026</title>
+  <meta name="description" content="A personal literary atlas of books read in 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/atlas.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="app">
+    <header class="masthead">
+      <p class="kicker">Plate of a private exhibition</p>
+      <h1>The Literary Journey</h1>
+      <p class="year-mark"><span>MMXXVI</span><i>2026</i></p>
+      <p class="lede" id="lede">A personal literary journey through books read in 2026.</p>
+    </header>
+
+    <nav class="atlas-nav" aria-label="Atlas plates">
+      <button class="nav-btn is-active" data-view="journey" aria-current="page">
+        <span class="numeral">I</span>
+        <span class="label">Journey</span>
+      </button>
+      <button class="nav-btn" data-view="timeline">
+        <span class="numeral">II</span>
+        <span class="label">Timeline</span>
+      </button>
+      <button class="nav-btn" data-view="ideas">
+        <span class="numeral">III</span>
+        <span class="label">Ideas</span>
+      </button>
+      <button class="nav-btn" data-view="worlds">
+        <span class="numeral">IV</span>
+        <span class="label">Literary Worlds</span>
+      </button>
+    </nav>
+
+    <main class="stage" id="stage">
+      <section class="view is-active" id="view-journey" data-view="journey" aria-hidden="false">
+        <div class="plate-header">
+          <h2>Geographical itinerary</h2>
+          <p>Locations of the volumes, in the order they were read. One book has no geographical marker.</p>
+        </div>
+        <div class="journey-layout">
+          <div class="map-frame">
+            <div class="map-tools">
+              <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+              <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+              <button type="button" id="zoom-reset" aria-label="Reset map">⊙</button>
+            </div>
+            <svg id="atlas-map" role="img" aria-label="World map of reading locations"></svg>
+            <div class="map-caption">
+              <span>The route follows reading order, not chronology of composition.</span>
+            </div>
+          </div>
+          <aside class="itinerary" id="itinerary" aria-label="Reading itinerary"></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-timeline" data-view="timeline" aria-hidden="true">
+        <div class="plate-header">
+          <h2>The year in volumes</h2>
+          <p>Dated readings occupy their true span. Volumes without dates remain undated.</p>
+        </div>
+        <div id="timeline-root"></div>
+      </section>
+
+      <section class="view" id="view-ideas" data-view="ideas" aria-hidden="true">
+        <div class="plate-header">
+          <h2>A constellation of themes</h2>
+          <p>Select a theme to see the books it binds. Select a book to open its plate.</p>
+        </div>
+        <div class="ideas-layout">
+          <aside class="theme-index" id="theme-index" aria-label="Themes"></aside>
+          <div class="network-frame">
+            <svg id="ideas-map" role="img" aria-label="Theme network"></svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-worlds" data-view="worlds" aria-hidden="true">
+        <div class="plate-header">
+          <h2>Literary worlds</h2>
+          <p>The journey gathered into rooms — as in a small museum.</p>
+        </div>
+        <div id="worlds-root" class="worlds-root"></div>
+      </section>
+    </main>
+
+    <footer class="colophon" id="colophon"></footer>
+  </div>
+
+  <div class="veil" id="veil" hidden></div>
+  <aside class="folio" id="folio" role="dialog" aria-modal="true" aria-labelledby="folio-title" aria-hidden="true" hidden>
+    <button class="folio-close" id="folio-close" type="button" aria-label="Close">Close</button>
+    <div class="folio-inner" id="folio-inner"></div>
+  </aside>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
