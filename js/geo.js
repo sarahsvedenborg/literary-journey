@@ -165,3 +165,46 @@ export function clusterOffsets(count) {
     return { dx: Math.cos(angle) * radius, dy: Math.sin(angle) * radius };
   });
 }
+
+export function paintMap(svg, { prefix = "" } = {}) {
+  svg.setAttribute("viewBox", `0 0 ${WIDTH} ${HEIGHT}`);
+  svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+  const inkId = `${prefix}paper-ink`;
+  const oceanId = `${prefix}ocean-wash`;
+  const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+  defs.innerHTML = `
+    <filter id="${inkId}" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="0.6"/>
+    </filter>
+    <radialGradient id="${oceanId}" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#efe3c6"/>
+      <stop offset="100%" stop-color="#d9c9a3"/>
+    </radialGradient>
+  `;
+  svg.appendChild(defs);
+
+  const ocean = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  ocean.setAttribute("class", "ocean");
+  ocean.setAttribute("x", "0");
+  ocean.setAttribute("y", "0");
+  ocean.setAttribute("width", String(WIDTH));
+  ocean.setAttribute("height", String(HEIGHT));
+  ocean.setAttribute("fill", `url(#${oceanId})`);
+  svg.appendChild(ocean);
+
+  const grid = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  grid.setAttribute("class", "graticule");
+  grid.setAttribute("d", graticulePath());
+  svg.appendChild(grid);
+
+  const landGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  landGroup.setAttribute("filter", `url(#${inkId})`);
+  LAND.forEach((ring) => {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("class", "land");
+    path.setAttribute("d", ringPath(ring));
+    landGroup.appendChild(path);
+  });
+  svg.appendChild(landGroup);
+}
