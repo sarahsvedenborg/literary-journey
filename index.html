@@ -10,15 +10,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/atlas.css" />
 </head>
-<body>
+<body data-mode="enter">
   <div class="grain" aria-hidden="true"></div>
 
-  <div class="app">
+  <section class="gate" id="gate" aria-label="Opening">
+    <p class="gate-year">2026</p>
+    <h1 class="gate-title">The Literary Journey</h1>
+    <p class="gate-lede">a year spent travelling through books</p>
+    <dl class="gate-stats">
+      <div>
+        <dt id="stat-works">—</dt>
+        <dd>works</dd>
+      </div>
+      <div>
+        <dt id="stat-authors">—</dt>
+        <dd>authors</dd>
+      </div>
+      <div>
+        <dt id="stat-years">—</dt>
+        <dd>years</dd>
+      </div>
+    </dl>
+    <button class="gate-enter" id="gate-enter" type="button">Enter journey</button>
+  </section>
+
+  <section class="tour" id="tour" hidden aria-hidden="true" aria-label="Guided journey">
+    <svg id="tour-map" role="img" aria-label="Guided map of the reading journey"></svg>
+    <div class="tour-vignette" aria-hidden="true"></div>
+    <div class="tour-progress-track" aria-hidden="true">
+      <div class="tour-progress-fill" id="tour-progress"></div>
+    </div>
+    <button class="tour-leave" id="tour-leave" type="button">The atlas</button>
+    <div class="tour-card" id="tour-card"></div>
+  </section>
+
+  <div class="app" hidden>
     <header class="masthead">
       <p class="kicker">Plate of a private exhibition</p>
       <h1>The Literary Journey</h1>
       <p class="year-mark"><span>MMXXVI</span><i>2026</i></p>
       <p class="lede" id="lede">A personal literary journey through books read in 2026.</p>
+      <p class="masthead-link"><button type="button" id="return-tour">Return to the guided journey</button></p>
     </header>
 
     <nav class="atlas-nav" aria-label="Atlas plates">

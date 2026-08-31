@@ -80,3 +80,18 @@ export function typeLabel(type) {
   const label = type.replace(/-/g, " ");
   return label.charAt(0).toUpperCase() + label.slice(1);
 }
+
+export function exhibitionStats(atlas) {
+  const works = atlas.books.length;
+  const authors = new Set(
+    atlas.books.map((book) => book.author).filter(Boolean)
+  ).size;
+  const years = atlas.books
+    .map((book) => book.publicationYear)
+    .filter((year) => typeof year === "number");
+  const span = years.length ? Math.max(...years) - Math.min(...years) : null;
+  const yearLabel = span
+    ? `${Math.floor(span / 100) * 100}+`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    : null;
+  return { works, authors, yearLabel };
+}
